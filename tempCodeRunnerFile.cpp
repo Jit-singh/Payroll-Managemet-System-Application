@@ -1,0 +1,1 @@
+cout << employer1.companyLocations << endl;
