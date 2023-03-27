@@ -112,5 +112,24 @@ void Employer :: modifyEmployeeDetails(){
                 cout << "Invalid input. Please enter yes or no." << endl << endl;
             }
         }
+        while(true){
+            string input;
+            cout << "Do you want to change employee name [yes/ no] : ";
+            getline(cin>>ws, input);
+            if(input == "yes"){
+                string changedName;
+                cout << "Enter a new name: ";
+                getline(cin>>ws, changedName);
+                employeeDetails[id].setName(changedName);
+
+                break;
+            }
+            else if(input == "no"){
+                break;
+            }
+            else{
+                cout << "Invalid input. Please enter yes or no." << endl << endl;
+            }
+        }
     }
 }
