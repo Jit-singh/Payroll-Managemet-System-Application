@@ -40,6 +40,11 @@ void Employer :: displayMenu(){
 void Employer :: addNewEmployee(){
     string name;
     string gender;
+    int doorNum;
+    string street;
+    string area;
+    string city;
+    int pincode;
     string location;
     string department;
     string employeeType;
@@ -50,6 +55,12 @@ void Employer :: addNewEmployee(){
 
     cout << "Enter employee name: "; getline(cin>>ws, name);
     cout << "Enter employee gender: "; getline(cin>>ws, gender);
+    cout << "Enter employee address: " << endl;
+    cout << "Enter door number: "; cin >> doorNum;
+    cout << "Enter street: "; getline(cin>>ws, street);
+    cout << "Enter area: "; getline(cin>>ws, area);
+    cout << "Enter city: "; getline(cin>>ws, city);
+    cout << "Enter pincode: "; cin >> pincode;
     cout << "Enter employee job location: "; getline(cin>>ws, location);
     cout << "Enter employee department: "; getline(cin>>ws, department);
     cout << "Enter employee type [Permanent/ Part-time/ contractor]: "; getline(cin>>ws, employeeType);
@@ -58,7 +69,7 @@ void Employer :: addNewEmployee(){
     cout << "Enter employee bank account number: "; getline(cin>>ws, bankAccNum);
     cout << "Enter employee CTC: "; cin >> ctc;
 
-    Employee emp(name, gender, location, department, employeeType, band, PF_num, bankAccNum, ctc);
+    Employee emp(name, gender, doorNum, street, area, city, pincode, location, department, employeeType, band, PF_num, bankAccNum, ctc);
     employeeID++;
 
     employeeDetails.insert({employeeID, emp});
@@ -75,6 +86,12 @@ void Employer :: displayAllEmployeeDetails(){
             cout << "\t\tEmployee ID " << (*itr).first << endl;
             cout << "Employee name \t\t\t:" << (*itr).second.getName() << endl;
             cout << "Employee gender \t\t:" << (*itr).second.getGender() << endl;
+            cout << "Employee Address" << endl;
+            cout << "         Door number \t\t:" << (*itr).second.getAddress().doorNum << endl;
+            cout << "         Street \t\t:" << (*itr).second.getAddress().street << endl;
+            cout << "         Area \t\t\t:" << (*itr).second.getAddress().area << endl;
+            cout << "         City \t\t\t:" << (*itr).second.getAddress().city << endl;
+            cout << "         Pincode  \t\t:" << (*itr).second.getAddress().pincode << endl;
             cout << "Employee job location \t\t:" << (*itr).second.getLocation() << endl;
             cout << "Employee department \t\t:" << (*itr).second.getDepartment() << endl;
             cout << "Employee type \t\t\t:" << (*itr).second.getEmployeeType() << endl;

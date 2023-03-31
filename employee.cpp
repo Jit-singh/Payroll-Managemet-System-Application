@@ -1,6 +1,14 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+struct EmployeeAddress{
+    int doorNum;
+    string street;
+    string area;
+    string city;
+    int pincode;
+};
+
 class Employee {
     string name;
     string gender;
@@ -15,9 +23,16 @@ class Employee {
     public: 
         Employee() = default;
         
-        Employee(string name, string gender, string location, string department, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
+        EmployeeAddress address;
+        
+        Employee(string name, string gender, int doorNum, string street, string area, string city, int pincode, string location, string department, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
             this->name = name;
             this->gender = gender;
+            address.doorNum = doorNum;
+            address.street = street;
+            address.area = area;
+            address.city = city;
+            address.pincode = pincode;
             this->location = location;
             this->department = department;
             this->employeeType = employeeType;
@@ -31,6 +46,13 @@ class Employee {
 
         void setName(string name){ this->name = name; }
         void setGender(string gender){ this->gender = gender; }
+        void setAddress(int doorNum, string street, string area, string city, int pincode){
+            address.doorNum = doorNum;
+            address.street = street;
+            address.area = area;
+            address.city = city;
+            address.pincode = pincode;
+        }
         void setLocation(string location){ this->location = location; }
         void setDepartment(string department){ this->department = department; }
         void setEmployeeType(string employeeType){ this->employeeType = employeeType; }
@@ -42,6 +64,7 @@ class Employee {
         //--------------------------------------- getters
         string getName(){ return name; }
         string getGender(){ return gender; }
+        EmployeeAddress getAddress(){ return address; }
         string getLocation(){ return location; }
         string getDepartment(){ return department; }
         string getEmployeeType(){ return employeeType; }
@@ -49,21 +72,5 @@ class Employee {
         string getPF_num(){ return PF_num; }
         string getBankAccNum(){ return bankAccNum; }
         float getCTC(){ return ctc; }
-
-        //--------------------------------------- Address
-
-        // void Address(string doorNo, string street, string area, string city, string pin){
-        //     this->doorNo = doorNo;
-        //     this->street = street;
-        //     this->area = area;
-        //     this->city = city;
-        //     this->pin = pin;
-
-        //     cout << "\t" << "Door No: " << doorNo << endl;
-        //     cout << "\t" << "Street: " << street << endl;
-        //     cout << "\t" << "Area: " << area << endl;
-        //     cout << "\t" << "City: " << city << endl;
-        //     cout << "\t" << "Pincode: " << pin << endl;
-        // }
 
 };
