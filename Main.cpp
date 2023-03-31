@@ -35,26 +35,23 @@ int main(){
     cout << endl;
 
     //----------------------------------------------------------------
-    employer1.displayMenu();
-
-    //----------------------------------------------------------------
     bool exit;
 	while(exit!=true){
-	    int opt;
+
+        employer1.displayMenu();
+	    
+        int opt;
 		cout << "Select a option: ";
 		cin >> opt;
-		switch(opt){
+		
+        switch(opt){
             case 1: {
                 employer1.addNewEmployee();
-                cout << endl;
-                employer1.displayMenu();
                 break;
             }
 
             case 2: {
                 employer1.modifyEmployeeDetails();
-                cout << endl;
-                employer1.displayMenu();
                 break;
             }
 
@@ -70,8 +67,6 @@ int main(){
 
             case 5: {
                 employer1.displayAllEmployeeDetails();
-                cout << endl;
-                employer1.displayMenu();
                 break;
             }
 
@@ -88,10 +83,10 @@ int main(){
             
             default: {
                 cout << "\n\t !!! Invalid Input !!!\n\n";
-                employer1.displayMenu();
                 break;
             }
 		};
+        cout << endl;
 	}
     return 0;
 }

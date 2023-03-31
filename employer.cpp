@@ -16,6 +16,7 @@ class Employer {
 
     void addNewEmployee();
 
+    // void modifyMenu();
     void modifyEmployeeDetails();
 
     // void removeEmployee();
@@ -100,99 +101,148 @@ void modifyMenu(){
 }
 
 void Employer :: modifyEmployeeDetails(){
-    cout << "\n---------- Modify Employee Details ---------\n\n";
-    cout << "Enter employee ID : ";
-    int id;
-    cin >> id;
-    if(employeeDetails.find(id) == employeeDetails.end()){
-        cout << "Employee of ID " << id << " doesn't exist." << endl;
+    if(employeeDetails.size()==0){
+        cout << "Sorry! List is Empty." << endl;
     }
     else{
-        modifyMenu();
-        bool 
-        while(out){
-            cout << "Choose an option to changes for: ";
-            int opt;
-            cin >> opt;
+        cout << "\n---------- Modify Employee Details ---------\n\n";
+        cout << "Enter employee ID : ";
+        int id;
+        cin >> id;
 
-            switch(opt){
-                case 1: {
-                    string changedName;
-                    cout << "Enter a new name: ";
-                    getline(cin>>ws, changedName);
-                    employeeDetails[id].setName(changedName);
-                    cout << "Name has changed successfully..." << endl;
-                    modifyMenu();
-                    break;
-                }
+        if(employeeDetails.find(id) == employeeDetails.end()){
+            cout << "Employee of ID " << id << " doesn't exist." << endl;
+        }
+        else{
+            bool out=false;
+            while(!out){
+                modifyMenu();
+                cout << "Choose an option to changes for: ";
+                int opt;
+                cin >> opt;
 
-                case 2: {
-                    cout << "Not Avaliable now..." << endl;
-                    break;
-                }
-                
-                case 3: {
-                    string changedLocation;
-                    cout << "Enter new location: ";
-                    getline(cin>>ws, changedLocation);
-                    employeeDetails[id].setLocation(changedLocation);
-                    cout << "Location has changed successfully..." << endl;
-                    break;
-                }
+                switch(opt){
+                    case 1: {
+                        string changedName;
+                        cout << "Enter a new name: ";
+                        getline(cin>>ws, changedName);
+                        employeeDetails[id].setName(changedName);
+                        cout << "Name has changed successfully..." << endl;
+                        modifyMenu();
+                        break;
+                    }
 
-                case 4: {
-                    string changedDepartment;
-                    cout << "Enter new department: ";
-                    getline(cin>>ws, changedDepartment);
-                    employeeDetails[id].setDepartment(changedDepartment);
-                    cout << "Department has changed successfully..." << endl;
-                    break;
-                }
-
-                case 5: {
-                    string changedEmpType;
-                    cout << "Enter new employement type: ";
-                    getline(cin>>ws, changedEmpType);
-                    employeeDetails[id].setEmployeeType(changedEmpType);
-                    cout << "Employement type has changed successfully..." << endl;
-                    break;
-                }
-
-                case 6: {
-                    string changedBand;
-                    cout << "Enter new Band: ";
-                    getline(cin>>ws, changedBand);
-                    employeeDetails[id].setBand(changedBand);
-                    cout << "Band has changed successfully..." << endl;
-                    break;
-                }
-
-                case 7: {
-                    string changedBankAccNum;
-                    cout << "Enter new bank account number: ";
-                    getline(cin>>ws, changedBankAccNum);
-                    employeeDetails[id].setBankAccNum(changedBankAccNum);
-                    cout << "Bank account number has changed successfully..." << endl;
-                    break;
-                }
-
-                case 8: {
-                    string changedCTC;
-                    cout << "Enter new CTC: ";
-                    getline(cin>>ws, changedCTC);
-                    employeeDetails[id].setCTC(changedCTC);
-                    cout << "CTC has changed successfully..." << endl;
-                    break;
-                }
-
-                case 9: {
+                    case 2: {
+                        cout << "Not Avaliable now..." << endl;
+                        break;
+                    }
                     
-                    break;
-                }
-                default: {
-                    break;
+                    case 3: {
+                        string changedLocation;
+                        cout << "Enter new location: ";
+                        getline(cin>>ws, changedLocation);
+                        employeeDetails[id].setLocation(changedLocation);
+                        cout << "Location has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 4: {
+                        string changedDepartment;
+                        cout << "Enter new department: ";
+                        getline(cin>>ws, changedDepartment);
+                        employeeDetails[id].setDepartment(changedDepartment);
+                        cout << "Department has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 5: {
+                        string changedEmpType;
+                        cout << "Enter new employement type: ";
+                        getline(cin>>ws, changedEmpType);
+                        employeeDetails[id].setEmployeeType(changedEmpType);
+                        cout << "Employement type has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 6: {
+                        string changedBand;
+                        cout << "Enter new Band: ";
+                        getline(cin>>ws, changedBand);
+                        employeeDetails[id].setBand(changedBand);
+                        cout << "Band has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 7: {
+                        string changedBankAccNum;
+                        cout << "Enter new bank account number: ";
+                        getline(cin>>ws, changedBankAccNum);
+                        employeeDetails[id].setBankAccNum(changedBankAccNum);
+                        cout << "Bank account number has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 8: {
+                        float changedCTC;
+                        cout << "Enter new CTC: ";
+                        cin >> changedCTC;
+                        employeeDetails[id].setCTC(changedCTC);
+                        cout << "CTC has changed successfully..." << endl;
+                        break;
+                    }
+
+                    case 9: {
+                        cout << "\n Employee Details Successfully changed \n\n";
+                        out=true;
+                        break;
+                    }
+                    default: {
+                        cout << "\n Invalid input! Please try again...\n";
+                        break;
+                    }
                 }
             }
         }
     }
 }
+
+
+/*
+
+/////// Generate pay slip
+
+    float ctc, basic, vpp, pf, incometax, allowance, messBill, net, gross;
+    ctc = user1.getCTC();
+    basic = (ctc * 0.6) / 12;
+    vpp = (ctc * 0.3) / 12;
+    pf = (ctc * 0.05) / 12;
+    allowance = (ctc * 0.05) / 12;
+
+    // if(ctc < 500000){
+    //     incometax = 0;
+    // } else if(ctc>=500000 && ctc<=1000000){
+    //     incometax = (ctc)
+    // }
+
+    // cout << "Enter mess bill amount : ";
+    // cin >> messBill;
+
+    gross = basic + vpp + pf + allowance;
+    // net = gross - incometax - messBill;
+
+
+
+    cout << "\n---------------- Salary slip ---------------\n\n";
+    printf("Total CTC : %0.2f\n", ctc);
+    printf("Basic salary : %0.2f\n", basic);
+    printf("Variable pay : %0.2f\n", vpp);
+    printf("Provident fund : %0.2f\n", pf);
+    printf("Other allowance : %0.2f\n", allowance);
+    // printf("Income tax : %0.2f\n", (user1.getCTC())*(0.6/12));
+    // printf("Mess bill : %0.2f\n", messBill);
+    // printf("Net pay : %0.2f\n", (user1.getCTC())*(0.6/12));
+    printf("Gross pay : %0.2f\n", gross);
+    cout << "-------------------------------------------\n\n";
+    break;
+
+*/
