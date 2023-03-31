@@ -5,7 +5,6 @@ class Employee {
     string name;
     string gender;
     string location;
-    // int employeeID=0;
     string department;
     string employeeType;
     string band;

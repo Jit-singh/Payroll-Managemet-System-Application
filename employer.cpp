@@ -85,6 +85,20 @@ void Employer :: displayAllEmployeeDetails(){
     }
 }
 
+
+void modifyMenu(){
+    cout << "\n-------------- What to change --------------\n\n";
+    cout << "Press 1. For change in employee name" << endl;
+    cout << "Press 2. For change in employee address" << endl;
+    cout << "Press 3. For change in employee location" << endl;
+    cout << "Press 4. For change in employee department" << endl;
+    cout << "Press 5. For change in employee type" << endl;
+    cout << "Press 6. For change in employee band" << endl;
+    cout << "Press 7. For change in employee bank account number" << endl;
+    cout << "Press 8. For change in employee CTC" << endl;
+    cout << "Press 9. For no change or exit" << endl << endl;
+}
+
 void Employer :: modifyEmployeeDetails(){
     cout << "\n---------- Modify Employee Details ---------\n\n";
     cout << "Enter employee ID : ";
@@ -94,41 +108,90 @@ void Employer :: modifyEmployeeDetails(){
         cout << "Employee of ID " << id << " doesn't exist." << endl;
     }
     else{
-        while(true){
-            string input;
-            cout << "Do you want to change employee name [yes/ no] : ";
-            getline(cin>>ws, input);
-            if(input == "yes"){
-                string changedName;
-                cout << "Enter a new name: ";
-                getline(cin>>ws, changedName);
-                employeeDetails[id].setName(changedName);
-                break;
-            }
-            else if(input == "no"){
-                break;
-            }
-            else{
-                cout << "Invalid input. Please enter yes or no." << endl << endl;
-            }
-        }
-        while(true){
-            string input;
-            cout << "Do you want to change employee name [yes/ no] : ";
-            getline(cin>>ws, input);
-            if(input == "yes"){
-                string changedName;
-                cout << "Enter a new name: ";
-                getline(cin>>ws, changedName);
-                employeeDetails[id].setName(changedName);
+        modifyMenu();
+        bool 
+        while(out){
+            cout << "Choose an option to changes for: ";
+            int opt;
+            cin >> opt;
 
-                break;
-            }
-            else if(input == "no"){
-                break;
-            }
-            else{
-                cout << "Invalid input. Please enter yes or no." << endl << endl;
+            switch(opt){
+                case 1: {
+                    string changedName;
+                    cout << "Enter a new name: ";
+                    getline(cin>>ws, changedName);
+                    employeeDetails[id].setName(changedName);
+                    cout << "Name has changed successfully..." << endl;
+                    modifyMenu();
+                    break;
+                }
+
+                case 2: {
+                    cout << "Not Avaliable now..." << endl;
+                    break;
+                }
+                
+                case 3: {
+                    string changedLocation;
+                    cout << "Enter new location: ";
+                    getline(cin>>ws, changedLocation);
+                    employeeDetails[id].setLocation(changedLocation);
+                    cout << "Location has changed successfully..." << endl;
+                    break;
+                }
+
+                case 4: {
+                    string changedDepartment;
+                    cout << "Enter new department: ";
+                    getline(cin>>ws, changedDepartment);
+                    employeeDetails[id].setDepartment(changedDepartment);
+                    cout << "Department has changed successfully..." << endl;
+                    break;
+                }
+
+                case 5: {
+                    string changedEmpType;
+                    cout << "Enter new employement type: ";
+                    getline(cin>>ws, changedEmpType);
+                    employeeDetails[id].setEmployeeType(changedEmpType);
+                    cout << "Employement type has changed successfully..." << endl;
+                    break;
+                }
+
+                case 6: {
+                    string changedBand;
+                    cout << "Enter new Band: ";
+                    getline(cin>>ws, changedBand);
+                    employeeDetails[id].setBand(changedBand);
+                    cout << "Band has changed successfully..." << endl;
+                    break;
+                }
+
+                case 7: {
+                    string changedBankAccNum;
+                    cout << "Enter new bank account number: ";
+                    getline(cin>>ws, changedBankAccNum);
+                    employeeDetails[id].setBankAccNum(changedBankAccNum);
+                    cout << "Bank account number has changed successfully..." << endl;
+                    break;
+                }
+
+                case 8: {
+                    string changedCTC;
+                    cout << "Enter new CTC: ";
+                    getline(cin>>ws, changedCTC);
+                    employeeDetails[id].setCTC(changedCTC);
+                    cout << "CTC has changed successfully..." << endl;
+                    break;
+                }
+
+                case 9: {
+                    
+                    break;
+                }
+                default: {
+                    break;
+                }
             }
         }
     }
