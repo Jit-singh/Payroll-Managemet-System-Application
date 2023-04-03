@@ -151,6 +151,26 @@ void Employer :: modifyEmployeeDetails(){
 
                     case 2: {
                         cout << "Not Avaliable now..." << endl;
+                        int changedDoorNum;
+                        string changedStreet;
+                        string changedArea;
+                        string changedCity;
+                        int changedPincode;
+                        cout << "Enter new door num: ";
+                        cin >> changedDoorNum;
+                        cout << "Enter new street: ";
+                        getline(cin>>ws, changedStreet);
+                        cout << "Enter new area: ";
+                        getline(cin>>ws, changedArea);
+                        cout << "Enter new city: ";
+                        getline(cin>>ws, changedCity);
+                        cout << "Enter new pincode: ";
+                        cin >> changedPincode;
+
+                        employeeDetails[id].setAddress(changedDoorNum, changedStreet, changedArea, changedCity, changedPincode);
+
+                        cout << "Address has changed successfully..." << endl;
+
                         break;
                     }
                     
