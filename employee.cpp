@@ -72,5 +72,4 @@ class Employee {
         string getPF_num(){ return PF_num; }
         string getBankAccNum(){ return bankAccNum; }
         float getCTC(){ return ctc; }
-
 };
