@@ -20,7 +20,7 @@ class Employer {
     void modifyEmployeeDetails();
 
     // void removeEmployee();
-    // void searchEmployee();
+    void searchEmployee();
     void displayAllEmployeeDetails();
 
 };
@@ -243,6 +243,45 @@ void Employer :: modifyEmployeeDetails(){
     }
 }
 
+
+void Employer:: searchEmployee(){
+    cout << "\n---------- Modify Employee Details ---------\n\n";
+    cout << "Enter employee ID : ";
+    int id;
+    cin >> id;
+
+    if(employeeDetails.size()==0){
+        cout << "Sorry! List is Empty." << endl;
+    }
+    else{
+        if(employeeDetails.find(id) == employeeDetails.end()){
+            cout << "Sorry! There is no any employee exist with ID " << id << endl;
+        }
+        else{
+            cout << "\n--------- Display Employee Details ---------\n\n";
+            for(itr=employeeDetails.begin(); itr!=employeeDetails.end(); itr++){
+                if((*itr).first == id){
+                    cout << "\t\tEmployee ID " << (*itr).first << endl;
+                    cout << "Employee name \t\t\t:" << (*itr).second.getName() << endl;
+                    cout << "Employee gender \t\t:" << (*itr).second.getGender() << endl;
+                    cout << "Employee Address" << endl;
+                    cout << "         Door number \t\t:" << (*itr).second.getAddress().doorNum << endl;
+                    cout << "         Street \t\t:" << (*itr).second.getAddress().street << endl;
+                    cout << "         Area \t\t\t:" << (*itr).second.getAddress().area << endl;
+                    cout << "         City \t\t\t:" << (*itr).second.getAddress().city << endl;
+                    cout << "         Pincode  \t\t:" << (*itr).second.getAddress().pincode << endl;
+                    cout << "Employee job location \t\t:" << (*itr).second.getLocation() << endl;
+                    cout << "Employee department \t\t:" << (*itr).second.getDepartment() << endl;
+                    cout << "Employee type \t\t\t:" << (*itr).second.getEmployeeType() << endl;
+                    cout << "Employee band \t\t\t:" << (*itr).second.getBand() << endl;
+                    cout << "Employee PF number \t\t:" << (*itr).second.getPF_num() << endl;
+                    cout << "Employee bank account number \t:" << (*itr).second.getBankAccNum() << endl;
+                    cout << "Employee CTC \t\t\t:" << (*itr).second.getCTC() << endl << endl;
+                }
+            }
+        }
+    }   
+}
 
 /*
 
