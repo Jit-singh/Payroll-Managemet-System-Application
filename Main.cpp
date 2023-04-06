@@ -56,8 +56,7 @@ int main(){
             }
 
             case 3: {
-                cout << "Not availible yet. Try another option.\n\n";
-                // employer1.removeEmployeeDetails();
+                employer1.removeEmployee();
                 break;
             }
 

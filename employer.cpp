@@ -16,11 +16,12 @@ class Employer {
 
     void addNewEmployee();
 
-    // void modifyMenu();
     void modifyEmployeeDetails();
 
-    // void removeEmployee();
+    void removeEmployee();
+
     void searchEmployee();
+
     void displayAllEmployeeDetails();
 
 };
@@ -239,6 +240,26 @@ void Employer :: modifyEmployeeDetails(){
                     }
                 }
             }
+        }
+    }
+}
+
+void Employer:: removeEmployee(){
+    cout << "\n---------- Remove Employee Details ---------\n\n";
+    cout << "Enter employee ID : ";
+    int id;
+    cin >> id;
+
+    if(employeeDetails.size()==0){
+        cout << "Sorry! List is Empty." << endl;
+    }
+    else{
+        if(employeeDetails.find(id) == employeeDetails.end()){
+            cout << "Sorry! There is no any employee exist with ID " << id << endl;
+        }
+        else{
+            employeeDetails.erase(id);
+            cout << "Employee details of ID " << id << " has deleted successfully..." << endl << endl;
         }
     }
 }
