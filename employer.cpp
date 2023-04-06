@@ -266,7 +266,7 @@ void Employer:: removeEmployee(){
 
 
 void Employer:: searchEmployee(){
-    cout << "\n---------- Modify Employee Details ---------\n\n";
+    cout << "\n---------- Search Employee Details ---------\n\n";
     cout << "Enter employee ID : ";
     int id;
     cin >> id;
