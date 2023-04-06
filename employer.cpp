@@ -304,7 +304,6 @@ void Employer:: searchEmployee(){
     }   
 }
 
-/*
 
 /////// Generate pay slip
 
@@ -341,5 +340,3 @@ void Employer:: searchEmployee(){
     printf("Gross pay : %0.2f\n", gross);
     cout << "-------------------------------------------\n\n";
     break;
-
-*/
