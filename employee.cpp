@@ -1,12 +1,27 @@
 #include<bits/stdc++.h>
 using namespace std;
 
+// define a structure for employee address
 struct EmployeeAddress{
     int doorNum;
     string street;
     string area;
     string city;
     int pincode;
+};
+
+// define a structure for employee salary slip
+struct PaySlip{
+    public:
+    string date;
+    float basic;
+    float variable;
+    float pf;
+    float allowance;
+    float incometax;
+    float messBill;
+    float netPay;
+    float grossPay;
 };
 
 class Employee {
@@ -21,10 +36,13 @@ class Employee {
     float ctc;
 
     public: 
+        // Default constructor
         Employee() = default;
         
+        // Address object
         EmployeeAddress address;
         
+        // Constructor with parameters
         Employee(string name, string gender, int doorNum, string street, string area, string city, int pincode, string location, string department, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
             this->name = name;
             this->gender = gender;
@@ -42,10 +60,13 @@ class Employee {
             this->ctc = ctc;
         }
 
-        //--------------------------------------- setters
-
-        void setName(string name){ this->name = name; }
-        void setGender(string gender){ this->gender = gender; }
+        // Setter methods for all data members
+        void setName(string name){ 
+            this->name = name; 
+        }
+        void setGender(string gender){ 
+            this->gender = gender; 
+        }
         void setAddress(int doorNum, string street, string area, string city, int pincode){
             address.doorNum = doorNum;
             address.street = street;
@@ -53,27 +74,61 @@ class Employee {
             address.city = city;
             address.pincode = pincode;
         }
-        void setLocation(string location){ this->location = location; }
-        void setDepartment(string department){ this->department = department; }
-        void setEmployeeType(string employeeType){ this->employeeType = employeeType; }
-        void setBand(string band){ this->band = band; }
-        void setPF_num(string PF_num){ this->PF_num = PF_num; }
-        void setBankAccNum(string bankAccNum){ this->bankAccNum = bankAccNum; }
-        void setCTC(float ctc){ this->ctc = ctc; }
+        void setLocation(string location){ 
+            this->location = location; 
+        }
+        void setDepartment(string department){ 
+            this->department = department; 
+        }
+        void setEmployeeType(string employeeType){ 
+            this->employeeType = employeeType; 
+        }
+        void setBand(string band){ 
+            this->band = band; 
+        }
+        void setPF_num(string PF_num){ 
+            this->PF_num = PF_num; 
+        }
+        void setBankAccNum(string bankAccNum){ 
+            this->bankAccNum = bankAccNum; 
+        }
+        void setCTC(float ctc){ 
+            this->ctc = ctc; 
+        }
 
-        //--------------------------------------- getters
-        string getName(){ return name; }
-        string getGender(){ return gender; }
-        EmployeeAddress getAddress(){ return address; }
-        string getLocation(){ return location; }
-        string getDepartment(){ return department; }
-        string getEmployeeType(){ return employeeType; }
-        string getBand(){ return band; }
-        string getPF_num(){ return PF_num; }
-        string getBankAccNum(){ return bankAccNum; }
-        float getCTC(){ return ctc; }
+        // Getter methods for all data members
+        string getName(){ 
+            return name; 
+        }
+        string getGender(){ 
+            return gender; 
+        }
+        EmployeeAddress getAddress(){ 
+            return address; 
+        }
+        string getLocation(){ 
+            return location; 
+        }
+        string getDepartment(){ 
+            return department; 
+        }
+        string getEmployeeType(){ 
+            return employeeType; 
+        }
+        string getBand(){ 
+            return band; 
+        }
+        string getPF_num(){ 
+            return PF_num; 
+        }
+        string getBankAccNum(){ 
+            return bankAccNum; 
+        }
+        float getCTC(){ 
+            return ctc; 
+        }
 
-        //--------------------------- generate Salary slip
-        vector<string> generatedPayslips;
+        // contain all parameters of generated salary slip using vector of type payslip structure
+        vector<PaySlip> listAllSalarySlips;
+        
 };
-
