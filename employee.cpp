@@ -72,5 +72,8 @@ class Employee {
         string getPF_num(){ return PF_num; }
         string getBankAccNum(){ return bankAccNum; }
         float getCTC(){ return ctc; }
-        
+
+        //--------------------------- generate Salary slip
+        vector<string> generatedPayslips;
 };
+

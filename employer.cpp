@@ -24,6 +24,7 @@ class Employer {
 
     void displayAllEmployeeDetails();
 
+    void generatePayslip();
 };
 
 void Employer :: displayMenu(){
@@ -280,63 +281,110 @@ void Employer:: searchEmployee(){
         }
         else{
             cout << "\n--------- Display Employee Details ---------\n\n";
-            for(itr=employeeDetails.begin(); itr!=employeeDetails.end(); itr++){
-                if((*itr).first == id){
-                    cout << "\t\tEmployee ID " << (*itr).first << endl;
-                    cout << "Employee name \t\t\t:" << (*itr).second.getName() << endl;
-                    cout << "Employee gender \t\t:" << (*itr).second.getGender() << endl;
-                    cout << "Employee Address" << endl;
-                    cout << "         Door number \t\t:" << (*itr).second.getAddress().doorNum << endl;
-                    cout << "         Street \t\t:" << (*itr).second.getAddress().street << endl;
-                    cout << "         Area \t\t\t:" << (*itr).second.getAddress().area << endl;
-                    cout << "         City \t\t\t:" << (*itr).second.getAddress().city << endl;
-                    cout << "         Pincode  \t\t:" << (*itr).second.getAddress().pincode << endl;
-                    cout << "Employee job location \t\t:" << (*itr).second.getLocation() << endl;
-                    cout << "Employee department \t\t:" << (*itr).second.getDepartment() << endl;
-                    cout << "Employee type \t\t\t:" << (*itr).second.getEmployeeType() << endl;
-                    cout << "Employee band \t\t\t:" << (*itr).second.getBand() << endl;
-                    cout << "Employee PF number \t\t:" << (*itr).second.getPF_num() << endl;
-                    cout << "Employee bank account number \t:" << (*itr).second.getBankAccNum() << endl;
-                    cout << "Employee CTC \t\t\t:" << (*itr).second.getCTC() << endl << endl;
-                }
-            }
+            
+            cout << "\t\tEmployee ID " << id << endl;
+            cout << "Employee name \t\t\t:" << employeeDetails[id].getName() << endl;
+            cout << "Employee gender \t\t:" << employeeDetails[id].getGender() << endl;
+            cout << "Employee Address" << endl;
+            cout << "         Door number \t\t:" << employeeDetails[id].getAddress().doorNum << endl;
+            cout << "         Street \t\t:" << employeeDetails[id].getAddress().street << endl;
+            cout << "         Area \t\t\t:" << employeeDetails[id].getAddress().area << endl;
+            cout << "         City \t\t\t:" << employeeDetails[id].getAddress().city << endl;
+            cout << "         Pincode  \t\t:" << employeeDetails[id].getAddress().pincode << endl;
+            cout << "Employee job location \t\t:" << employeeDetails[id].getLocation() << endl;
+            cout << "Employee department \t\t:" << employeeDetails[id].getDepartment() << endl;
+            cout << "Employee type \t\t\t:" << employeeDetails[id].getEmployeeType() << endl;
+            cout << "Employee band \t\t\t:" << employeeDetails[id].getBand() << endl;
+            cout << "Employee PF number \t\t:" << employeeDetails[id].getPF_num() << endl;
+            cout << "Employee bank account number \t:" << employeeDetails[id].getBankAccNum() << endl;
+            cout << "Employee CTC \t\t\t:" << employeeDetails[id].getCTC() << endl << endl;
+
         }
     }   
 }
 
-
-/////// Generate pay slip
-
-    float ctc, basic, vpp, pf, incometax, allowance, messBill, net, gross;
-    ctc = user1.getCTC();
-    basic = (ctc * 0.6) / 12;
-    vpp = (ctc * 0.3) / 12;
-    pf = (ctc * 0.05) / 12;
-    allowance = (ctc * 0.05) / 12;
-
-    // if(ctc < 500000){
-    //     incometax = 0;
-    // } else if(ctc>=500000 && ctc<=1000000){
-    //     incometax = (ctc)
-    // }
-
-    // cout << "Enter mess bill amount : ";
-    // cin >> messBill;
-
-    gross = basic + vpp + pf + allowance;
-    // net = gross - incometax - messBill;
+bool validationMonth(string month){
+    if(month == "january" || month == "february" || month == "march" || month == "april" || month == "may" || month == "june" ||
+         month == "july" || month == "august" || month == "september" || month == "october" || month == "november" || month == "december"){
+        return true;
+    }
+    return false;
+}
 
 
+void Employer:: generatePayslip(){
+    string monthOfPay;
+    int empID;
+    float messBill;
+    string transferDate;
 
-    cout << "\n---------------- Salary slip ---------------\n\n";
-    printf("Total CTC : %0.2f\n", ctc);
-    printf("Basic salary : %0.2f\n", basic);
-    printf("Variable pay : %0.2f\n", vpp);
-    printf("Provident fund : %0.2f\n", pf);
-    printf("Other allowance : %0.2f\n", allowance);
-    // printf("Income tax : %0.2f\n", (user1.getCTC())*(0.6/12));
-    // printf("Mess bill : %0.2f\n", messBill);
-    // printf("Net pay : %0.2f\n", (user1.getCTC())*(0.6/12));
-    printf("Gross pay : %0.2f\n", gross);
-    cout << "-------------------------------------------\n\n";
-    break;
+    cout << "Enter the salary month (e.g. january, febarury...) : ";
+    getline(cin>>ws, monthOfPay);
+
+    if(!validationMonth(monthOfPay)){
+        cout << "Enter employee ID : ";
+        cin >> empID;
+
+        if(employeeDetails.size()==0){
+            cout << "Sorry! List is Empty." << endl;
+        }
+        else{
+            if(employeeDetails.find(id) == employeeDetails.end()){
+                cout << "Employee of ID " << id << " doesn't exist." << endl;
+            }
+            else{
+                cout << "Enter amount of mess bill : ";
+                cin >> messBill;
+
+                cout << "Enter date of salary transfer : ";
+                getline(cin>>ws, transferDate);
+
+                float basic, vpp, pf, incometax, allowance, netPay, grossPay;
+                ctc = employeeDetails[empID].getCTC();
+                basic = (ctc * 0.6) / 12;
+                vpp = (ctc * 0.3) / 12;
+                pf = (ctc * 0.05) / 12;
+                allowance = (ctc * 0.05) / 12;
+
+                if(ctc < 500000){
+                    incometax = 0;
+                }
+                else if(ctc>=500000 && ctc<=1000000){
+                    incometax = (ctc * 0.05) / 12;
+                }
+                else if(ctc>=1000001 && ctc<=1500000){
+                    incometax = (ctc * 0.1) / 12;
+                }
+                else if(ctc>=1500001 && ctc<=2000000){
+                    incometax = (ctc * 0.15) / 12;
+                }
+                else {
+                    incometax = (ctc * 0.2) / 12;
+                }
+
+                grossPay = basic + vpp + pf + allowance;
+                netPay = grossPay - incometax - messBill;
+
+            }
+        }
+    }
+    else{
+        cout << "Enter a valid month name..." << endl << endl;
+    }
+}
+
+
+
+
+    // cout << "\n---------------- Salary slip ---------------\n\n";
+    // printf("Total CTC : %0.2f\n", ctc);
+    // printf("Basic salary : %0.2f\n", basic);
+    // printf("Variable pay : %0.2f\n", vpp);
+    // printf("Provident fund : %0.2f\n", pf);
+    // printf("Other allowance : %0.2f\n", allowance);
+    // // printf("Income tax : %0.2f\n", (user1.getCTC())*(0.6/12));
+    // // printf("Mess bill : %0.2f\n", messBill);
+    // // printf("Net pay : %0.2f\n", (user1.getCTC())*(0.6/12));
+    // printf("Gross pay : %0.2f\n", gross);
+    // cout << "-------------------------------------------\n\n";
+    // break;
