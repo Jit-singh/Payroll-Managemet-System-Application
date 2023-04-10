@@ -1,12 +1,14 @@
 #include "employee.cpp"
+#include "validation.cpp"
+
 using namespace std;
 
 class Employer {
     public:
     string companyName = "Sasken Technologies Private Limited";
-    vector<string> companyLocations = {"Banglore", "Channai", "Pune", "Kolkata"};
-    vector<string> companyBands = {"GT", "E1", "E2", "E3", "L1", "L2", "L3"};
-    vector<string> companyDepartments = {"SEC", "SatComm", "Devices", "RAN"};
+    vector<string> companyLocations = {"banglore", "channai", "pune", "kolkata"};
+    vector<string> companyBands = {"GT", "SDE1", "SDE2", "SDE3"};
+    vector<string> allEmployementTypes = {"permanent", "part-time", "contract"};
     int employeeID=0;
 
     map<int, Employee> employeeDetails;
@@ -38,49 +40,101 @@ void Employer :: displayMenu(){
 void Employer :: addNewEmployee(){
     string name;
     string gender;
-    int doorNum;
+    string houseNum;
     string street;
     string area;
     string city;
-    int pincode;
+    string pincode;
     string location;
-    string department;
     string employeeType;
     string band;
     string PF_num;
     string bankAccNum;
     float ctc;
 
-    cout << "Enter employee name: "; getline(cin>>ws, name);
-    cout << "Enter employee gender: "; getline(cin>>ws, gender);
-    cout << "Enter employee address... \n";
-    cout << "Enter door number: "; cin >> doorNum;
-    cout << "Enter street: "; getline(cin>>ws, street);
-    cout << "Enter area: "; getline(cin>>ws, area);
-    cout << "Enter city: "; getline(cin>>ws, city);
-    cout << "Enter pincode: "; cin >> pincode;
-    cout << "Enter employee job location: "; getline(cin>>ws, location);
-    cout << "Enter employee department: "; getline(cin>>ws, department);
-    cout << "Enter employee type [Permanent/ Part-time/ contractor]: "; getline(cin>>ws, employeeType);
-    cout << "Enter employee band: "; getline(cin>>ws, band);
-    cout << "Enter employee PF number: "; getline(cin>>ws, PF_num);
-    cout << "Enter employee bank account number: "; getline(cin>>ws, bankAccNum);
+    cout << endl << "Fill up the employee details correctly to add in employee list." << endl << endl;
+
+    cout << "Enter employee name: ";
+    getline(cin>>ws, name);
+
+    inputGenderAgain:
+    cout << "Enter employee gender: "; 
+    getline(cin>>ws, gender);
+    if(!validateGender(gender)){
+        goto inputGenderAgain;
+    }
+
+    cout << "Now enter the address details -\n";
+
+    inputHouseNumAgain:
+    cout << "Enter house number: "; 
+    cin >> houseNum;
+    if(!validateHouseNumber(houseNum)){
+        goto inputHouseNumAgain;
+    }
+
+    cout << "Enter street: "; 
+    getline(cin>>ws, street);
+    cout << "Enter area: "; 
+    getline(cin>>ws, area);
+    cout << "Enter city: "; 
+    getline(cin>>ws, city);
+
+    inputPincode:
+    cout << "Enter pincode: "; 
+    cin >> pincode;
+    if(!validatePincode(pincode)){
+        goto inputPincode;
+    }
+
+    //=======================================================
+    cout << "All avaliable locations of company - " << endl;
+    for(int i=0; i<companyLocations.size(); i++){
+        cout << " [" << i+1 << "]. " << companyLocations[i] << endl;
+    }
+    inputLocation:
+    cout << "Enter employee job location: "; 
+    getline(cin>>ws, location);
+    if(!validateLocation(companyLocations, location)){
+        goto inputLocation;
+    }
+
+    //=======================================================
+    cout << "All avaliable types of employement - " << endl;
+    for(int i=0; i<allEmployementTypes.size(); i++){
+        cout << " [" << i+1 << "]. " << allEmployementTypes[i] << endl;
+    }
+    inputEmployeeType:
+    cout << "Choose any one type of employement: "; 
+    getline(cin>>ws, employeeType);
+    if(!validateEmplyeeType(allEmployementTypes, employeeType)){
+        goto inputEmployeeType;
+    }
+
+    //=======================================================
+    cout << "All avaliable bands in company - " << endl;
+    for(int i=0; i<companyBands.size(); i++){
+        cout << " [" << i+1 << "]. " << companyBands[i] << endl;
+    }
+    inputEmployeeBand:
+    cout << "Enter employee band: "; 
+    getline(cin>>ws, band);
+    if(!validateEmplyeeBand(companyBands, employeeType)){
+        goto inputEmployeeBand;
+    }
+
+    //=======================================================
+    cout << "Enter employee PF number: "; 
+    getline(cin>>ws, PF_num);
+    cout << "Enter employee bank account number: "; 
+    getline(cin>>ws, bankAccNum);
     cout << "Enter employee CTC: "; cin >> ctc;
 
-    Employee emp(name, gender, doorNum, street, area, city, pincode, location, department, employeeType, band, PF_num, bankAccNum, ctc);
+    Employee emp(name, gender, houseNum, street, area, city, pincode, location, employeeType, band, PF_num, bankAccNum, ctc);
     employeeID++;
 
     employeeDetails.insert({employeeID, emp});
     
-}
-
-
-bool validationMonth(string month){
-    if(month == "january" || month == "february" || month == "march" || month == "april" || month == "may" || month == "june" ||
-         month == "july" || month == "august" || month == "september" || month == "october" || month == "november" || month == "december"){
-        return true;
-    }
-    return false;
 }
 
 void Employer:: generateSalarySlip(){
@@ -182,12 +236,11 @@ void modifyMenu(){
     cout << "Press 1. For change in employee name" << endl;
     cout << "Press 2. For change in employee address" << endl;
     cout << "Press 3. For change in employee location" << endl;
-    cout << "Press 4. For change in employee department" << endl;
-    cout << "Press 5. For change in employee type" << endl;
-    cout << "Press 6. For change in employee band" << endl;
-    cout << "Press 7. For change in employee bank account number" << endl;
-    cout << "Press 8. For change in employee CTC" << endl;
-    cout << "Press 9. For no change or exit" << endl << endl;
+    cout << "Press 4. For change in employee type" << endl;
+    cout << "Press 5. For change in employee band" << endl;
+    cout << "Press 6. For change in employee bank account number" << endl;
+    cout << "Press 7. For change in employee CTC" << endl;
+    cout << "Press 8. For no change or exit" << endl << endl;
 }
 
 void Employer :: modifyEmployeeDetails(){
@@ -224,13 +277,13 @@ void Employer :: modifyEmployeeDetails(){
 
                     case 2: {
                         cout << "Not Avaliable now..." << endl;
-                        int changedDoorNum;
+                        string changedHouseNum;
                         string changedStreet;
                         string changedArea;
                         string changedCity;
-                        int changedPincode;
-                        cout << "Enter new door num: ";
-                        cin >> changedDoorNum;
+                        string changedPincode;
+                        cout << "Enter new house num: ";
+                        cin >> changedHouseNum;
                         cout << "Enter new street: ";
                         getline(cin>>ws, changedStreet);
                         cout << "Enter new area: ";
@@ -240,7 +293,7 @@ void Employer :: modifyEmployeeDetails(){
                         cout << "Enter new pincode: ";
                         cin >> changedPincode;
 
-                        employeeDetails[id].setAddress(changedDoorNum, changedStreet, changedArea, changedCity, changedPincode);
+                        employeeDetails[id].setAddress(changedHouseNum, changedStreet, changedArea, changedCity, changedPincode);
 
                         cout << "Address has changed successfully..." << endl;
 
@@ -257,15 +310,6 @@ void Employer :: modifyEmployeeDetails(){
                     }
 
                     case 4: {
-                        string changedDepartment;
-                        cout << "Enter new department: ";
-                        getline(cin>>ws, changedDepartment);
-                        employeeDetails[id].setDepartment(changedDepartment);
-                        cout << "Department has changed successfully..." << endl;
-                        break;
-                    }
-
-                    case 5: {
                         string changedEmpType;
                         cout << "Enter new employement type: ";
                         getline(cin>>ws, changedEmpType);
@@ -274,7 +318,7 @@ void Employer :: modifyEmployeeDetails(){
                         break;
                     }
 
-                    case 6: {
+                    case 5: {
                         string changedBand;
                         cout << "Enter new Band: ";
                         getline(cin>>ws, changedBand);
@@ -283,7 +327,7 @@ void Employer :: modifyEmployeeDetails(){
                         break;
                     }
 
-                    case 7: {
+                    case 6: {
                         string changedBankAccNum;
                         cout << "Enter new bank account number: ";
                         getline(cin>>ws, changedBankAccNum);
@@ -292,7 +336,7 @@ void Employer :: modifyEmployeeDetails(){
                         break;
                     }
 
-                    case 8: {
+                    case 7: {
                         float changedCTC;
                         cout << "Enter new CTC: ";
                         cin >> changedCTC;
@@ -301,11 +345,12 @@ void Employer :: modifyEmployeeDetails(){
                         break;
                     }
 
-                    case 9: {
+                    case 8: {
                         cout << "\n Employee Details Successfully changed \n\n";
                         out=true;
                         break;
                     }
+
                     default: {
                         cout << "\n Invalid input! Please try again...\n";
                         break;
@@ -356,13 +401,12 @@ void Employer:: searchEmployee(){
             cout << "Employee name \t\t\t: " << employeeDetails[id].getName() << endl;
             cout << "Employee gender \t\t: " << employeeDetails[id].getGender() << endl;
             cout << "Employee Address" << endl;
-            cout << "   Door number \t\t: " << employeeDetails[id].getAddress().doorNum << endl;
+            cout << "   House number \t\t: " << employeeDetails[id].getAddress().houseNum << endl;
             cout << "   Street \t\t: " << employeeDetails[id].getAddress().street << endl;
             cout << "   Area \t\t\t: " << employeeDetails[id].getAddress().area << endl;
             cout << "   City \t\t\t: " << employeeDetails[id].getAddress().city << endl;
             cout << "   Pincode  \t\t: " << employeeDetails[id].getAddress().pincode << endl;
             cout << "Employee job location \t\t: " << employeeDetails[id].getLocation() << endl;
-            cout << "Employee department \t\t: " << employeeDetails[id].getDepartment() << endl;
             cout << "Employee type \t\t\t: " << employeeDetails[id].getEmployeeType() << endl;
             cout << "Employee band \t\t\t: " << employeeDetails[id].getBand() << endl;
             cout << "Employee PF number \t\t: " << employeeDetails[id].getPF_num() << endl;
@@ -385,13 +429,12 @@ void Employer :: displayAllEmployeeDetails(){
             cout << "Employee name \t\t\t: " << (*itr).second.getName() << endl;
             cout << "Employee gender \t\t: " << (*itr).second.getGender() << endl;
             cout << "Employee Address -" << endl;
-            cout << "   Door number \t\t: " << (*itr).second.getAddress().doorNum << endl;
+            cout << "   House number \t\t: " << (*itr).second.getAddress().houseNum << endl;
             cout << "   Street \t\t\t: " << (*itr).second.getAddress().street << endl;
             cout << "   Area \t\t\t\t: " << (*itr).second.getAddress().area << endl;
             cout << "   City \t\t\t\t: " << (*itr).second.getAddress().city << endl;
             cout << "   Pincode  \t\t :" << (*itr).second.getAddress().pincode << endl;
             cout << "Employee job location \t\t: " << (*itr).second.getLocation() << endl;
-            cout << "Employee department \t\t: " << (*itr).second.getDepartment() << endl;
             cout << "Employee type \t\t\t: " << (*itr).second.getEmployeeType() << endl;
             cout << "Employee band \t\t\t: " << (*itr).second.getBand() << endl;
             cout << "Employee PF number \t\t: " << (*itr).second.getPF_num() << endl;

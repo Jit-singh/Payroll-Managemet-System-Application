@@ -10,32 +10,6 @@ int main(){
     Employer employer1;
     cout << "\n------------- Employer Details -------------\n\n";
     cout << employer1.companyName << endl << endl;
-    cout << "All Locations : ";
-    for(int i=0; i<employer1.companyLocations.size(); i++){
-        cout << employer1.companyLocations[i];
-        if(i+1 != employer1.companyLocations.size()){
-            cout << "/ ";
-        }
-    }
-    cout << endl;
-
-    cout << "All Bands : ";
-    for(int i=0; i<employer1.companyBands.size(); i++){
-        cout << employer1.companyBands[i];
-        if(i+1 != employer1.companyBands.size()){
-            cout << "/ ";
-        }
-    }
-    cout << endl;
-    
-    cout << "All Departments : ";
-    for(int i=0; i<employer1.companyDepartments.size(); i++){
-        cout << employer1.companyDepartments[i];
-        if(i+1 != employer1.companyDepartments.size()){
-            cout << "/ ";
-        }
-    }
-    cout << endl;
 
     // Employee Details
     bool exit;
