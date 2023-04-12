@@ -75,8 +75,10 @@ void Employer :: addNewEmployee(){
 
     cout << "Enter street: "; 
     getline(cin>>ws, street);
+
     cout << "Enter area: "; 
     getline(cin>>ws, area);
+    
     cout << "Enter city: "; 
     getline(cin>>ws, city);
 
@@ -126,9 +128,12 @@ void Employer :: addNewEmployee(){
     //=======================================================
     cout << "Enter employee PF number: "; 
     getline(cin>>ws, PF_num);
+
     cout << "Enter employee bank account number: "; 
     getline(cin>>ws, bankAccNum);
-    cout << "Enter employee CTC: "; cin >> ctc;
+
+    cout << "Enter employee CTC: "; 
+    cin >> ctc;
 
     Employee emp(name, gender, houseNum, street, area, city, pincode, location, employeeType, band, PF_num, bankAccNum, ctc);
     employeeID++;

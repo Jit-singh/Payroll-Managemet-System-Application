@@ -42,7 +42,9 @@ class Employee {
         EmployeeAddress address;
         
         // Constructor with parameters
-        Employee(string name, string gender, string houseNum, string street, string area, string city, string pincode, string location, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
+        Employee(string name, string gender, string houseNum, string street, string area, string city, string pincode, 
+            string location, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
+                
             this->name = name;
             this->gender = gender;
             address.houseNum = houseNum;
