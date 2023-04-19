@@ -48,7 +48,6 @@ void Employer :: addNewEmployee(){
     string location;
     string employeeType;
     string band;
-    string PF_num;
     string bankAccNum;
     float ctc;
 
@@ -109,7 +108,7 @@ void Employer :: addNewEmployee(){
     inputEmployeeType:
     cout << "Choose any one type of employement: "; 
     getline(cin>>ws, employeeType);
-    if(!validateEmplyeeType(allEmployementTypes, employeeType)){
+    if(!validateEmployeeType(allEmployementTypes, employeeType)){
         goto inputEmployeeType;
     }
 
@@ -121,21 +120,18 @@ void Employer :: addNewEmployee(){
     inputEmployeeBand:
     cout << "Enter employee band: "; 
     getline(cin>>ws, band);
-    if(!validateEmplyeeBand(companyBands, employeeType)){
+    if(!validateEmployeeBand(companyBands, band)){
         goto inputEmployeeBand;
     }
 
     //=======================================================
-    cout << "Enter employee PF number: "; 
-    getline(cin>>ws, PF_num);
-
     cout << "Enter employee bank account number: "; 
     getline(cin>>ws, bankAccNum);
 
     cout << "Enter employee CTC: "; 
     cin >> ctc;
 
-    Employee emp(name, gender, houseNum, street, area, city, pincode, location, employeeType, band, PF_num, bankAccNum, ctc);
+    Employee emp(name, gender, houseNum, street, area, city, pincode, location, employeeType, band, bankAccNum, ctc);
     employeeID++;
 
     employeeDetails.insert({employeeID, emp});
@@ -407,14 +403,13 @@ void Employer:: searchEmployee(){
             cout << "Employee gender \t\t: " << employeeDetails[id].getGender() << endl;
             cout << "Employee Address" << endl;
             cout << "   House number \t\t: " << employeeDetails[id].getAddress().houseNum << endl;
-            cout << "   Street \t\t: " << employeeDetails[id].getAddress().street << endl;
+            cout << "   Street \t\t\t: " << employeeDetails[id].getAddress().street << endl;
             cout << "   Area \t\t\t: " << employeeDetails[id].getAddress().area << endl;
             cout << "   City \t\t\t: " << employeeDetails[id].getAddress().city << endl;
-            cout << "   Pincode  \t\t: " << employeeDetails[id].getAddress().pincode << endl;
+            cout << "   Pincode  \t\t\t: " << employeeDetails[id].getAddress().pincode << endl;
             cout << "Employee job location \t\t: " << employeeDetails[id].getLocation() << endl;
             cout << "Employee type \t\t\t: " << employeeDetails[id].getEmployeeType() << endl;
             cout << "Employee band \t\t\t: " << employeeDetails[id].getBand() << endl;
-            cout << "Employee PF number \t\t: " << employeeDetails[id].getPF_num() << endl;
             cout << "Employee bank account number \t: " << employeeDetails[id].getBankAccNum() << endl;
             printf("Employee CTC \t\t\t: %0.2f", employeeDetails[id].getCTC());
             cout << endl << endl;
@@ -436,13 +431,12 @@ void Employer :: displayAllEmployeeDetails(){
             cout << "Employee Address -" << endl;
             cout << "   House number \t\t: " << (*itr).second.getAddress().houseNum << endl;
             cout << "   Street \t\t\t: " << (*itr).second.getAddress().street << endl;
-            cout << "   Area \t\t\t\t: " << (*itr).second.getAddress().area << endl;
-            cout << "   City \t\t\t\t: " << (*itr).second.getAddress().city << endl;
-            cout << "   Pincode  \t\t :" << (*itr).second.getAddress().pincode << endl;
+            cout << "   Area \t\t\t: " << (*itr).second.getAddress().area << endl;
+            cout << "   City \t\t\t: " << (*itr).second.getAddress().city << endl;
+            cout << "   Pincode  \t\t\t :" << (*itr).second.getAddress().pincode << endl;
             cout << "Employee job location \t\t: " << (*itr).second.getLocation() << endl;
             cout << "Employee type \t\t\t: " << (*itr).second.getEmployeeType() << endl;
             cout << "Employee band \t\t\t: " << (*itr).second.getBand() << endl;
-            cout << "Employee PF number \t\t: " << (*itr).second.getPF_num() << endl;
             cout << "Employee bank account number \t: " << (*itr).second.getBankAccNum() << endl;
             printf("Employee CTC \t\t\t: %0.2f", (*itr).second.getCTC());
             cout << endl << endl;

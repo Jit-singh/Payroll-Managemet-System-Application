@@ -30,7 +30,6 @@ class Employee {
     string location;
     string employeeType;
     string band;
-    string PF_num;
     string bankAccNum;
     float ctc;
 
@@ -43,7 +42,7 @@ class Employee {
         
         // Constructor with parameters
         Employee(string name, string gender, string houseNum, string street, string area, string city, string pincode, 
-            string location, string employeeType, string band, string PF_num, string bankAccNum, float ctc){
+            string location, string employeeType, string band, string bankAccNum, float ctc){
                 
             this->name = name;
             this->gender = gender;
@@ -55,7 +54,6 @@ class Employee {
             this->location = location;
             this->employeeType = employeeType;
             this->band = band;
-            this->PF_num = PF_num;
             this->bankAccNum = bankAccNum;
             this->ctc = ctc;
         }
@@ -83,9 +81,6 @@ class Employee {
         void setBand(string band){ 
             this->band = band; 
         }
-        void setPF_num(string PF_num){ 
-            this->PF_num = PF_num; 
-        }
         void setBankAccNum(string bankAccNum){ 
             this->bankAccNum = bankAccNum; 
         }
@@ -111,9 +106,6 @@ class Employee {
         }
         string getBand(){ 
             return band; 
-        }
-        string getPF_num(){ 
-            return PF_num; 
         }
         string getBankAccNum(){ 
             return bankAccNum; 

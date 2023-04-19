@@ -62,7 +62,7 @@ bool validateLocation(vector<string> allLocations, string location){
 }
 
 // validation of types of employement
-bool validateEmplyeeType(vector<string> allEmployementTypes, string employeeType){
+bool validateEmployeeType(vector<string> allEmployementTypes, string employeeType){
     for(int i=0; i<allEmployementTypes.size(); i++){
         if(allEmployementTypes[i]==employeeType){
             return true;
@@ -72,7 +72,7 @@ bool validateEmplyeeType(vector<string> allEmployementTypes, string employeeType
     return false;
 }
 
-bool validateEmplyeeBand(vector<string> companyBands, string employeeBand){
+bool validateEmployeeBand(vector<string> companyBands, string employeeBand){
     for(int i=0; i<companyBands.size(); i++){
         if(companyBands[i]==employeeBand){
             return true;
