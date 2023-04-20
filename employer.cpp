@@ -5,15 +5,16 @@ using namespace std;
 
 class Employer {
     public:
-    string companyName = "Sasken Technologies Private Limited";
-    vector<string> companyLocations = {"banglore", "channai", "pune", "kolkata"};
-    vector<string> companyBands = {"GT", "SDE1", "SDE2", "SDE3"};
+    string companyName;
+    vector<string> companyLocations;
+    vector<string> companyBands;
     vector<string> allEmployementTypes = {"permanent", "part-time", "contract"};
     int employeeID=0;
 
     map<int, Employee> employeeDetails;
     map<int, Employee>:: iterator itr;
 
+    void displayEmployerDetails();
     void displayMenu();
     void generateSalarySlip();
     void addNewEmployee();
@@ -23,6 +24,23 @@ class Employer {
     void displayAllEmployeeDetails();
     void displayAllSalarySlips();
 };
+
+void Employer :: displayEmployerDetails(){
+    cout << "\n------------- Employer Details -------------\n\n";
+    
+    cout << companyName << endl << endl;
+
+    cout << "All company locations : " << endl;
+    for(int i=0; i<companyLocations.size(); i++){
+        cout << "\t[" << i+1 << "]. " << companyLocations[i] << endl;
+    }
+    
+    cout << "All company bands : " << endl;
+    for(int i=0; i<companyBands.size(); i++){
+        cout << "\t[" << i+1 << "]. " << companyBands[i] << endl;
+    }
+    cout << endl;
+}
 
 void Employer :: displayMenu(){
     cout << "\n-------------------- Menu ------------------\n";
