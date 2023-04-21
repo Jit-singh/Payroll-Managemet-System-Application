@@ -64,7 +64,7 @@ int main(){
             }
             
             default: {
-                cout << "\n\t !!! Invalid Input !!!\n\n";
+                cout << endl << "\t !!! Invalid Input !!!" << endl << endl;
                 break;
             }
 		};
