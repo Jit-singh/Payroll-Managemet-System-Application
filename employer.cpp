@@ -14,6 +14,7 @@ class Employer {
     map<int, Employee> employeeDetails;
     map<int, Employee>:: iterator itr;
 
+    void inputEmployerDetails();
     void displayEmployerDetails();
     void displayMenu();
     void generateSalarySlip();
@@ -24,6 +25,37 @@ class Employer {
     void displayAllEmployeeDetails();
     void displayAllSalarySlips();
 };
+
+void Employer :: inputEmployerDetails(){
+    cout << "Enter employer name : ";
+    getline(cin>>ws, companyName);
+
+    while(true){
+        string employerLocation;
+        cout << "Enter employer locations : ";
+        getline(cin>>ws, employerLocation);
+        companyLocations.push_back(employerLocation);
+        int n;
+        cout << "Press 1 to add a employer locations or Press any key to continue : ";
+        cin >> n;
+        if(n!=1){
+            break;
+        }
+    }
+
+    while(true){
+        string employerBand;
+        cout << "Enter employer band : ";
+        getline(cin>>ws, employerBand);
+        companyBands.push_back(employerBand);
+        int n;
+        cout << "Press 1 to add a employer locations or Press any key to continue : ";
+        cin >> n;
+        if(n!=1){
+            break;
+        }
+    }
+}
 
 void Employer :: displayEmployerDetails(){
     cout << "\n------------- Employer Details -------------\n\n";
@@ -69,7 +101,7 @@ void Employer :: addNewEmployee(){
     string bankAccNum;
     float ctc;
 
-    cout << endl << "Fill up the employee details correctly to add in employee list." << endl << endl;
+    cout << endl << "NOTE:- Fill up the employee details correctly." << endl << endl;
 
     cout << "Enter employee name: ";
     getline(cin>>ws, name);
@@ -107,7 +139,7 @@ void Employer :: addNewEmployee(){
     }
 
     //=======================================================
-    cout << "All avaliable locations of company - " << endl;
+    cout << "All avaliable locations of employer - " << endl;
     for(int i=0; i<companyLocations.size(); i++){
         cout << " [" << i+1 << "]. " << companyLocations[i] << endl;
     }
@@ -143,10 +175,14 @@ void Employer :: addNewEmployee(){
     }
 
     //=======================================================
-    cout << "Enter employee bank account number: "; 
+    inputBankAccNum:
+    cout << "Enter employee bank account number: ";
     getline(cin>>ws, bankAccNum);
+    if(!validateAccountNumber(bankAccNum)){
+        goto inputBankAccNum;
+    }
 
-    cout << "Enter employee CTC: "; 
+    cout << "Enter employee CTC per annum: "; 
     cin >> ctc;
 
     Employee emp(name, gender, houseNum, street, area, city, pincode, location, employeeType, band, bankAccNum, ctc);
@@ -162,7 +198,7 @@ void Employer:: generateSalarySlip(){
     float messBill;
     string transferDate;
 
-    cout << "Enter the salary month name : ";
+    cout << "Enter the salary paid month: ";
     getline(cin>>ws, monthOfPay);
 
     if(validationMonth(monthOfPay)){
@@ -273,7 +309,7 @@ void Employer :: modifyEmployeeDetails(){
         cin >> id;
 
         if(employeeDetails.find(id) == employeeDetails.end()){
-            cout << "Sorry! There is no any employee exist with ID " << id << endl;
+            cout << "Sorry! There is no any employee with ID " << id << " exist." << endl;
         }
         else{
             bool out=false;
@@ -289,28 +325,42 @@ void Employer :: modifyEmployeeDetails(){
                         cout << "Enter a new name: ";
                         getline(cin>>ws, changedName);
                         employeeDetails[id].setName(changedName);
-                        cout << "Name has changed successfully..." << endl;
+                        cout << "Name has changed successfully...";
                         modifyMenu();
                         break;
                     }
 
                     case 2: {
-                        cout << "Not Avaliable now..." << endl;
                         string changedHouseNum;
                         string changedStreet;
                         string changedArea;
                         string changedCity;
                         string changedPincode;
-                        cout << "Enter new house num: ";
+                        
+                        cout << "Enter new house number: ";
+                        inputHouseNumberAgain:
                         cin >> changedHouseNum;
+                        if(!validateHouseNumber(changedHouseNum)){
+                            cout << "Enter a valid house number: ";
+                            goto inputHouseNumberAgain;
+                        }
+                        
                         cout << "Enter new street: ";
                         getline(cin>>ws, changedStreet);
+                        
                         cout << "Enter new area: ";
                         getline(cin>>ws, changedArea);
+                        
                         cout << "Enter new city: ";
                         getline(cin>>ws, changedCity);
+                        
                         cout << "Enter new pincode: ";
+                        inputPincodeAgain:
                         cin >> changedPincode;
+                        if(!validatePincode(changedPincode)){
+                            cout << "Enter valid pincode: " << endl;
+                            goto inputPincodeAgain;
+                        }
 
                         employeeDetails[id].setAddress(changedHouseNum, changedStreet, changedArea, changedCity, changedPincode);
 
@@ -320,27 +370,60 @@ void Employer :: modifyEmployeeDetails(){
                     }
                     
                     case 3: {
+                        cout << "All avaliable locations of employer - " << endl;
+                        for(int i=0; i<companyLocations.size() ; i++){
+                            cout << " [" << i+1 << "]. " << companyLocations[i] << endl;
+                        }
                         string changedLocation;
                         cout << "Enter new location: ";
+
+                        inputLocationAgain:
                         getline(cin>>ws, changedLocation);
+                        if(!validateLocation(companyLocations, changedLocation)){
+                            cout << "Enter a valid location: ";
+                            goto inputLocationAgain;
+                        }
+
                         employeeDetails[id].setLocation(changedLocation);
                         cout << "Location has changed successfully..." << endl;
                         break;
                     }
 
                     case 4: {
+                        cout << "All avaliable types of employement - " << endl;
+                        for(int i=0; i<allEmployementTypes.size(); i++){
+                            cout << " [" << i+1 << "]. " << allEmployementTypes[i] << endl;
+                        }
                         string changedEmpType;
                         cout << "Enter new employement type: ";
+
+                        inputEmployeeTypeAgain:
                         getline(cin>>ws, changedEmpType);
+                        if(!validateEmployeeType(allEmployementTypes, changedEmpType)){
+                            cout << "Enter a valid employement type: ";
+                            goto inputEmployeeTypeAgain;
+                        }
+
                         employeeDetails[id].setEmployeeType(changedEmpType);
                         cout << "Employement type has changed successfully..." << endl;
                         break;
                     }
 
                     case 5: {
+                        cout << "All avaliable bands of employer - " << endl;
+                        for(int i=0; i<companyBands.size(); i++){
+                            cout << " [" << i+1 << "]. " << companyBands[i] << endl;
+                        }
                         string changedBand;
                         cout << "Enter new Band: ";
+
+                        inputEmployeeBandAgain:
                         getline(cin>>ws, changedBand);
+                        if(!validateEmployeeBand(companyBands, changedBand)){
+                            cout << "Enter a valid band: ";
+                            goto inputEmployeeBandAgain;
+                        }
+
                         employeeDetails[id].setBand(changedBand);
                         cout << "Band has changed successfully..." << endl;
                         break;
@@ -349,7 +432,12 @@ void Employer :: modifyEmployeeDetails(){
                     case 6: {
                         string changedBankAccNum;
                         cout << "Enter new bank account number: ";
+                        inputBankAccNumAgain:
                         getline(cin>>ws, changedBankAccNum);
+                        if(!validateAccountNumber(changedBankAccNum)){
+                            cout << "Enter a valid account number ..." << endl;
+                            goto inputBankAccNumAgain;
+                        }
                         employeeDetails[id].setBankAccNum(changedBankAccNum);
                         cout << "Bank account number has changed successfully..." << endl;
                         break;
@@ -357,7 +445,7 @@ void Employer :: modifyEmployeeDetails(){
 
                     case 7: {
                         float changedCTC;
-                        cout << "Enter new CTC: ";
+                        cout << "Enter new CTC per annum: ";
                         cin >> changedCTC;
                         employeeDetails[id].setCTC(changedCTC);
                         cout << "CTC has changed successfully..." << endl;
@@ -391,7 +479,7 @@ void Employer:: removeEmployee(){
     }
     else{
         if(employeeDetails.find(id) == employeeDetails.end()){
-            cout << "Sorry! There is no any employee exist with ID " << id << endl;
+            cout << "Sorry! There is no any employee with ID " << id << " exist." << endl;
         }
         else{
             employeeDetails.erase(id);
@@ -412,7 +500,7 @@ void Employer:: searchEmployee(){
     }
     else{
         if(employeeDetails.find(id) == employeeDetails.end()){
-            cout << "Sorry! There is no any employee exist with ID " << id << endl;
+            cout << "Sorry! There is no any employee with ID " << id << " exist." << endl;
         }
         else{
             cout << "\n--------- Display Employee Details ---------\n\n";
@@ -474,7 +562,7 @@ void Employer :: displayAllSalarySlips(){
     }
     else{
         if(employeeDetails.find(empId) == employeeDetails.end()){
-            cout << "Sorry! There is no any employee exist with ID " << empId << endl;
+            cout << "Sorry! There is no any employee with ID " << empId << " exist." << endl;
         }
         else{
             if(employeeDetails[empId].listAllSalarySlips.size()==0){
@@ -487,7 +575,7 @@ void Employer :: displayAllSalarySlips(){
                     cout << "       salary date : " << (*it).date  << endl;
                     printf("Basic pay \t\t\t: %0.2f\n", (*it).basic);
                     printf("Variable pay \t\t\t: %0.2f\n", (*it).variable);
-                    printf("Provident fund \t\t: %0.2f\n", (*it).pf);
+                    printf("Provident fund \t\t\t: %0.2f\n", (*it).pf);
                     printf("Other allowance \t\t: %0.2f\n", (*it).allowance);
                     printf("Income tax \t\t\t: %0.2f\n", (*it).incometax);
                     printf("Mess bill \t\t\t: %0.2f\n", (*it).messBill);

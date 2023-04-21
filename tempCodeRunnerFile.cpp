@@ -1,1 +1,2 @@
-cout << employer1.companyLocations << endl;
+
+        switch(opt){

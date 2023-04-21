@@ -9,39 +9,12 @@ int main(){
 
     Employer employer1;
 
-    string employerName, employerBand, employerLocation;
-    cout << "Enter employer name : ";
-    getline(cin>>ws, employerName);
-    employer1.companyName = employerName;
-
-    while(true){
-        cout << "Enter employer locations : ";
-        getline(cin>>ws, employerLocation);
-        employer1.companyLocations.push_back(employerLocation);
-        int n;
-        cout << "Press 1 to add a employer locations or Press any key to continue : ";
-        cin >> n;
-        if(n!=1){
-            break;
-        }
-    }
-
-    while(true){
-        cout << "Enter employer band : ";
-        getline(cin>>ws, employerBand);
-        employer1.companyBands.push_back(employerBand);
-        int n;
-        cout << "Press 1 to add a employer locations or Press any key to continue : ";
-        cin >> n;
-        if(n!=1){
-            break;
-        }
-    }
+    employer1.inputEmployerDetails();
+    employer1.displayEmployerDetails();
 
     // Employee Details
     bool exit;
 	while(exit!=true){
-        employer1.displayEmployerDetails();
         employer1.displayMenu();
 
         int opt;
